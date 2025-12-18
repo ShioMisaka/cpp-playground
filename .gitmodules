@@ -1,3 +1,4 @@
 [submodule "tool/ok-cpp"]
 	path = tool/ok-cpp
 	url = git@github.com:ShioMisaka/ok-cpp.git
+	branch = main
