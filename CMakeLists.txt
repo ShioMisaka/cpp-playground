@@ -5,8 +5,8 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # 添加项目，vscode 的静态检查就可以工作了
 foreach(subdir
-    01_move_semantics
-    02_RB_tree
+    cpp_demo/01_move_semantics
+    cpp_demo/02_RB_tree
     qt_demo/calculator
     qt_demo/note_book
 )
