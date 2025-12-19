@@ -45,4 +45,4 @@ add_executable(${PROJECT_NAME} ${SOURCE})
 # target_link_libraries(${PROJECT_NAME} ...)
 
 # 包含目录（不需要加上第三方库的包含）
-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../)
