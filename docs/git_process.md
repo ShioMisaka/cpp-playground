@@ -206,7 +206,7 @@ git rebase origin/dev
 
 使用 `rebase` 来拉取新代码
 
-当期你正在开发 D-E 的内容，但是 main 有新的 F-G 内容。
+当期你正在开发 D-E 的内容，但是 dev 有新的 F-G 内容。
 
 ```txt
 dev:    A — B — C — F — G
@@ -216,11 +216,11 @@ feature:             D — E
 
 使用 `rebase` 来同步
 ```bash
-git checkout main
+git checkout dev
 git pull
 
 git checkout feature
-git rebase main
+git rebase dev
 ```
 
 同步后，D-E 就会
@@ -316,3 +316,107 @@ git push
 ```
 
 ---
+
+## 六、撤销更改
+
+### 1️⃣ 撤销工作区的修改（尚未 git add）
+
+如果你修改了文件但还没 `git add`，想丢弃这些更改：
+
+```bash
+# 撤销单个文件的修改
+git checkout -- <file>
+
+# 或（推荐新语法）
+git restore <file>
+```
+
+```bash
+# 撤销所有工作区的修改（谨慎！）
+git restore .
+# 或
+git checkout -- .
+```
+> ⚠️ 这会永久丢弃你未暂存的更改，无法恢复！
+
+### 2️⃣ 撤销已暂存的更改（已 git add，但未提交）
+
+如果你已经 `git add`，但想取消暂存，回到工作区：
+
+```bash
+# 取消暂存某个文件
+git restore --staged <file>
+
+# 或旧语法
+git reset HEAD <file>
+```
+```bash
+# 取消暂存某个文件
+git restore --staged <file>
+
+# 或旧语法
+git reset HEAD <file>
+```
+> 此操作不会丢失文件内容，只是取消暂存，文件仍保留在工作区。
+
+### 3️⃣ 撤销最近一次提交（已 commit，但未 push）
+
+如果你刚提交了，但发现有问题，想修改这次提交：
+
+#### 1. 修改最后一次提交（保留更改）
+```bash
+# 修改提交信息或添加遗漏文件
+git add <forgotten-file>
+git commit --amend
+```
+
+#### 2. 完全撤销最后一次提交，保留修改在工作区
+```bash
+git reset --soft HEAD~1
+```
+> 这样提交被撤销，但代码改动还在工作区，可以重新提交。
+
+#### 3. 完全撤销最后一次提交并丢弃所有更改
+```bash
+git reset --hard HEAD~1
+```
+> ⚠️ 所有更改将永久丢失！
+
+
+### 4️⃣ 撤销已推送的提交（已 push 到远程）
+
+如果已经 `push` 到远程仓库，不建议使用 `reset --hard`，因为会重写历史，影响协作。
+
+推荐使用 `git revert`（安全、可协作）：
+
+```bash
+# 撤销指定提交，生成一个“反向”提交
+git revert <commit-hash>
+```
+例如：
+```bash
+git revert HEAD        # 撤销最新一次提交
+git revert abc1234     # 撤销某次具体提交
+```
+
+> ✅ 优点：不会改变历史，适合多人协作。
+>
+>❌ 缺点：会新增一个提交记录。
+
+### 5️⃣ 回退到某个历史版本（谨慎使用）
+
+如果想回到某个旧版本，并放弃之后的所有更改：
+
+```bash
+# 查看历史
+git log --oneline
+
+# 回退到指定提交（保留工作区更改）
+git reset --soft <commit>
+
+# 彻底回退（丢弃之后所有更改）
+git reset --hard <commit>
+
+# 如果已推送，还需强制推送（危险！）
+git push --force-with-lease origin <branch>
+```
