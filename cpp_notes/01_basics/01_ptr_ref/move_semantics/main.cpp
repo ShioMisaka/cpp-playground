@@ -52,10 +52,10 @@ void test01()
     // （2）右值引用
     Entity&& rvalue = Entity(2); // 这里的Entity属于一个将亡值
     // 右值引用无法接收一个左值
-    // Entity&& ravlue0 = i; // × 错误，无法将右值引用绑定到左值
+    // Entity&& ravlue0 = i; // ❌ 错误，无法将右值引用绑定到左值
 
     // 现在 rvalue 已经有自己的一个名字了，他已经成为了一个左值，不能再被右值引用，除非使用 std::move 进行显示转换
-    // Entity&& rvalue2 = rvalue; // × 错误，无法将右值引用绑定到左值
+    // Entity&& rvalue2 = rvalue; // ❌ 错误，无法将右值引用绑定到左值
     Entity&& rvalue2 = std::move(rvalue); // √ 正确
 
     // std::move 的作用是将一个左值表达式无条件的转换为一个将亡值（xvalue）
