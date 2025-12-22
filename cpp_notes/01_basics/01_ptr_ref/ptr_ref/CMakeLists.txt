@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/build)
+
 set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../)
 
 # 如果没有指定构建类型，默认为 Release
@@ -43,7 +44,7 @@ set(SOURCE main.cpp)
 add_executable(${PROJECT_NAME} ${SOURCE})
 
 # 链接第三方库
-target_link_libraries(${PROJECT_NAME} ${PROJECT_ROOT_DIR})
+# target_link_libraries(${PROJECT_NAME} )
 
 # 包含目录（不需要加上第三方库的包含）
-# target_include_directories(${PROJECT_NAME} PUBLIC )
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_ROOT_DIR})
