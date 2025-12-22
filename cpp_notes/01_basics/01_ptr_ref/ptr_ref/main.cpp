@@ -8,7 +8,6 @@
 void test01()
 {
     int temp = 10;
-    int temp2 = 20;
 
     // 常量指针（底层cosnt）- 不能通过指针修改值
     const int *a = &temp;
@@ -38,7 +37,30 @@ void test01()
     temp = 20; // 正确：直接修改原变量
 }
 
+void test02()
+{
+    int arr[5] = {1, 2, 3, 4, 5};
+
+    // 数组指针：指向数组的指针
+    int (*arrPtr)[5] = &arr;
+    for (int i = 0; i < 5;++i) {
+        std::cout << (*arrPtr)[i] << " ";
+    }
+    std::cout << "\n";
+
+    // 指针数组：储存指针的数组
+    int *ptrArr[5];
+    for (int i = 0; i < 5; ++i) {
+        ptrArr[i] = &arr[i];
+    }
+
+    for (int i = 0; i < 5; ++i) {
+        std::cout << *ptrArr[i] << " ";
+    }
+    std::cout << "\n";
+}
+
 int main() {
-    std::cout << "hello world" << std::endl;
+    test02();
     return 0;
 }

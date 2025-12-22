@@ -8,6 +8,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/build)
 
+set(PROJECT_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../../../)
+
 # 如果没有指定构建类型，默认为 Release
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
@@ -45,4 +47,4 @@ add_executable(${PROJECT_NAME} ${SOURCE})
 # target_link_libraries(${PROJECT_NAME} ...)
 
 # 包含目录（不需要加上第三方库的包含）
-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../)
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_ROOT_DIR})
