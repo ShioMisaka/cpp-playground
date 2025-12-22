@@ -60,17 +60,20 @@ git config user.email
 
 > 其他指令
 ```bash
-git config --global user.name "Alice"   # 修改全局用户名
+git config --global user.name "Alice"           # 修改全局用户名
 
-git config user.email "alice@work.com"  # 修改当前仓库邮箱
+git config user.email "alice@work.com"          # 修改当前仓库邮箱
 
-git config --list                       # 查看所有配置
+git config --list                               # 查看所有配置
 
-git config --list --show-origin         # 查看配置来源
+git config --list --show-origin                 # 查看配置来源
 
-git config --global --list              # 查看全局配置
+git config --global --list                      # 查看全局配置
 
-git config user.name                    # 查看某一项值
+git config user.name                            # 查看某一项值
+
+git config --global core.editor "vim"           # 修改默认打开编辑器
+git config --global core.editor "code --wait"   
 ```
 ## 二、作为 Fork 贡献者开始
 > 如果你是作为贡献者开发请阅读这一章
@@ -272,7 +275,7 @@ git pull
 ```
 
 #### 合并 dev
-```
+```bash
 git merge dev
 git push
 ```
@@ -419,4 +422,19 @@ git reset --hard <commit>
 
 # 如果已推送，还需强制推送（危险！）
 git push --force-with-lease origin <branch>
+```
+## 七、其他
+```bash
+git log  # 查看完整提交历史
+
+git log --onelin # 简介显示一行
+
+git log -5          # 最近5个
+git log --oneline -3
+
+git log dev
+
+# 可视化分支结构 + commit 指向
+git log --oneline --all --graph
+
 ```
