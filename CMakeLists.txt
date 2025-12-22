@@ -7,6 +7,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 foreach(subdir
     cpp_notes/01_basics/01_ptr_ref/move_semantics
     cpp_notes/01_basics/01_ptr_ref/ptr_ref
+    cpp_notes/01_basics/02_keywords/const
 )
     add_subdirectory(${subdir})
 endforeach()
