@@ -1,0 +1,2 @@
+add_subdirectory(calculator)
+add_subdirectory(note_book)
