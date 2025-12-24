@@ -36,7 +36,20 @@ void test01()
     std::cout << arrPtr << '\n';
 }
 
+void test02()
+{
+	if (std::is_signed<char>::value) {
+		printf("is signed, your computer is x86. \n");
+	}
+	else {
+		printf("is unsigned, your computer is arm. \n");
+	}
+
+	const char str[] = "hello\0 111";
+	std::cout << str << std::endl;
+}
+
 int main() {
-    test01();
+    test02();
     return 0;
 }

@@ -1,2 +1,0 @@
-add_subdirectory(nomal)
-add_subdirectory(std_string)

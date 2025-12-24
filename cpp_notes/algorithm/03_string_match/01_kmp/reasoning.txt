@@ -1,0 +1,17 @@
+
+0123456789ABCDEFGHI
+                  i
+ABABABAABABAAABABAA     19
+       ABABAAABABAA            12
+       001231123456
+                  j
+
+prefix_len = 1
+ABABAAABABAA
+001231
+      i
+i
+ABABABAABABAAABABAA
+CBC
+001
+j
