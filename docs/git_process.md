@@ -91,6 +91,13 @@ git config --global core.editor "code --wait"
 ### 2️⃣ Clone 自己 Fork 的仓库
 ```bash
 git clone https://github.com/{贡献者}/your-repo.git
+
+# 只克隆 dev 分支（完整历史）
+git clone -b dev --single-branch https://github.com/{贡献者}/your-repo.git
+
+# 只克隆 dev 分支（最新代码）
+git clone -b dev --single-branch --depth 1 https://github.com/{贡献者}/your-repo.git
+
 cd your-repo
 ```
 
@@ -109,6 +116,15 @@ origin   https://github.com/{贡献者}/repo.git    (push)
 upstream https://github.org/{管理者}/repo.git    (fetch)
 upstream https://github.org/{管理者}/repo.git    (push)  # ❌ 需要权限
 ```
+
+将原仓库的 dev 合并到你本地的 dev中
+```bash
+git checkout dev
+git merge upstream/dev
+# 或用 rebase：
+git rebase upstream/dev
+```
+
 ### 4️⃣ 开发
 然后就可以开始在自己的仓库中日常开发啦，跳转到第三章，等到你的功能完成的差不多
 
@@ -140,6 +156,13 @@ upstream https://github.org/{管理者}/repo.git    (push)  # ❌ 需要权限
 ### 2️⃣ 克隆仓库
 ```bash
 git clone https://github.com/yourname/project.git
+
+# 只克隆 dev 分支（完整历史）
+git clone -b dev --single-branch https://github.com/{管理者}/your-repo.git
+
+# 只克隆 dev 分支（最新代码）
+git clone -b dev --single-branch --depth 1 https://github.com/{管理者}/your-repo.git
+
 cd project
 
 git remote -v # 查看远程
