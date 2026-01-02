@@ -33,8 +33,8 @@ Hi username! You've successfully authenticated.
 
 在开发前还需要设置一下信息
 
-| 层级         | 命令                    | 存储位置             | 作用范围 |
-| ---------- | --------------------- | ---------------- | ---- |
+| 层级           | 命令                  | 存储位置          | 作用范围 |
+| --------------| --------------------- | ---------------- | -------  |
 | 本地（local）  | `git config`          | `.git/config`    | 当前仓库 |
 | 全局（global） | `git config --global` | `~/.gitconfig`   | 当前用户 |
 | 系统（system） | `git config --system` | `/etc/gitconfig` | 所有用户 |

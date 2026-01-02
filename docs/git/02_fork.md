@@ -40,16 +40,38 @@ upstream https://github.org/{管理者}/repo.git    (fetch)
 upstream https://github.org/{管理者}/repo.git    (push)  # ❌ 需要权限
 ```
 
+远程分支
+```bash
+git branch -r 
+# 输出
+    origin/HEAD -> origin/main
+    origin/dev
+    origin/main
+    upstream/main
+
+git fetch upstream main
+
+git log --oneline
+# 输出:
+    c2395ef18 (HEAD -> dev, origin/main, origin/dev, origin/HEAD, main) test:delete test.py
+    448916790 Merge branch 'dev' of github.com:ShioMisaka/ultralytics into dev
+    9e80aac27 test:add bifpn_test
+    79c6f1486 feature:添加了BiFPN
+    432efee9a (upstream/main) Update pyproject.toml to zensical>=0.0.15 (#23052)
+    ae859fbd8 Add note about background class for YOLO-World models (#23058)
+```
+
 将原仓库的 main 合并到你本地的 main 中
 ```bash
 git checkout main 
-git fetch upstream/main
+git fetch upstream main
+
 # 或用 rebase：
 git rebase upstream/main
 
 # 推送到自己的远程分支上
 git push -u origin main  # -u 默认绑定到origin/main分支上
-# 如果已经绑定到自己的仓库了
+# 如果已经绑定到自己的仓库了，直接push
 git push
 ```
 
