@@ -42,10 +42,15 @@ cd tool/ok-cpp
 chmod +x ./install.sh
 sudo ./install.sh
 
+# Create a new project (generates main.cpp, CMakeLists.txt, build/)
+ok-cpp mkp 03_AVL_tree
+
 # Run any project from root
 ok-cpp run cpp_notes/01_basics/02_keywords/static
 ok-cpp run --debug cpp_notes/01_basics/02_keywords/static
 ```
+
+**Important**: Always use `ok-cpp mkp projectname` to create new tutorial projects.
 
 ## Code Architecture
 

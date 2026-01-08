@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(02_RB_tree)
+project(03_AVL_tree)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
