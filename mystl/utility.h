@@ -75,6 +75,4 @@ void print_container_info(const _Cntr& cntr, size_t limit = 15)
 	std::cout << cntr.data() << " s:c = " << cntr.size()<< ":"<< cntr.capacity() << std::endl;
 	print_container_data(cntr.begin(), cntr.end());
 }
-
-
-}
+} // mystl

@@ -10,3 +10,6 @@ add_subdirectory(02_keywords/const)
 # 03_string
 add_subdirectory(03_string/nomal)
 add_subdirectory(03_string/std_string)
+
+# 04_multithread
+add_subdirectory(04_multithread/01_thread_management)
