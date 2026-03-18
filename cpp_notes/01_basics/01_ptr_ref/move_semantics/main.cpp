@@ -82,7 +82,8 @@ void Func(T&& t) {
 void test02()
 {
     //（1）万能引用
-    // T&& 不完全是我上面所说的 右值引用 ，在模板参数推导的上下文中，T&& 有一个特殊的名字——万能引用（Scott Meyers提出的术语），现在更被官方地称为转发引用（Forwarding Reference）
+    // T&& 不完全是我上面所说的 右值引用 ，在模板参数推导的上下文中，T&& 有一个特殊的名字——万能引用（Scott Meyers提出的术语）
+    // 现在更被官方地称为转发引用（Forwarding Reference）
     // 右值引用不能接收左值，而万能引用可以根据传入类型自动推导
 
     Entity x(1);
@@ -184,16 +185,43 @@ Entity getEntity(){
     return a;
 }
 
-#include "mystl/utility.h"
-
 void test04()
 {
-    // Entity&& a = getEntity();
-    // std::cout << a << '\n';
+    Entity&& a = getEntity();  // 这样写语法是正确的，但不需要
+    std::cout << a << '\n';
 
-    // Entity b = mystl::move(a);
-    // std::cout << b << '\n';
+    Entity b = mystl::move(a);
+    std::cout << b << '\n';
 
+    // 直接接收就好
+    Entity e = getEntity(); // 推荐写法
+    // 这种写法叫做生命周期延长 (Lifetime Extension)。它将返回的临时对象的生命周期延长到和引用 e 一样长。
+    // 因为直接按值接收（Entity e），编译器会做得更好，开销是完全一样的（甚至更低），而且按值接收的代码可读性更好。
+
+    /* 
+        第一优先级：NRVO（命名返回值优化）—— 0 次拷贝，0 次移动
+        在绝大多数现代C++编译器（GCC, Clang, MSVC）中，即使你没有开启特定的优化等级（例如在 -O0 下），编译器也会执行 NRVO (Named Return Value Optimization)。
+        编译器发现你要返回局部的 a，并且外层要把它赋给 e，它干脆直接在外部变量 e 的内存地址上构造 a。
+
+        结果： 只会调用一次普通的有参构造函数 Entity(1)。拷贝构造和移动构造都不会被调用。
+
+        第二优先级：移动构造（如果 NRVO 失效）
+        如果你的函数逻辑非常复杂（比如有多个分支返回不同的局部变量），导致编译器无法实施 NRVO，或者你手动加了编译参数禁用优化（如 GCC 的 -fno-elide-constructors），C++ 标准规定：
+        返回局部变量时，编译器会隐式地将其视为右值（Rvalue）。
+
+        结果： 此时会优先调用 Entity 的移动构造函数 (Move Constructor)。将 a 内部的资源“偷”给外部的接收者，开销极小。
+
+        第三优先级：拷贝构造（如果没有移动构造）
+        如果编译器无法优化，且你的 Entity 类没有定义/被删除了移动构造函数，编译器才会退而求其次。
+
+        结果： 调用拷贝构造函数 (Copy Constructor)。这是性能最差的情况。
+    */
+}
+
+#include "mystl/utility.h"
+
+void test05()
+{
     int &&int1 = 1;
 
     std::string &&str = "sad";
@@ -208,8 +236,6 @@ void test04()
     std::cout << str3 << std::endl;
 
     std::string &str4 = str3;
-
-    
 }
 
 int main()
